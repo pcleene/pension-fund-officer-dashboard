@@ -1,0 +1,174 @@
+{
+  "name": "members_search_index",
+  "mappings": {
+    "dynamic": false,
+    "fields": {
+      "memberId": {
+        "type": "string",
+        "analyzer": "lucene.keyword"
+      },
+      "icNumber": {
+        "type": "string",
+        "analyzer": "lucene.keyword"
+      },
+      "personalInfo": {
+        "type": "document",
+        "fields": {
+          "fullName": [
+            {
+              "type": "string",
+              "analyzer": "lucene.standard"
+            },
+            {
+              "type": "autocomplete",
+              "tokenization": "edgeGram",
+              "minGrams": 3,
+              "maxGrams": 15
+            }
+          ],
+          "gender": {
+            "type": "token"
+          },
+          "region": {
+            "type": "token"
+          },
+          "generationGroup": {
+            "type": "token"
+          },
+          "age": {
+            "type": "number"
+          },
+          "dateOfBirth": {
+            "type": "date"
+          }
+        }
+      },
+      "employmentProfile": {
+        "type": "document",
+        "fields": {
+          "jobCategory": {
+            "type": "token"
+          },
+          "employmentStatus": {
+            "type": "token"
+          },
+          "currentEmployer": {
+            "type": "document",
+            "fields": {
+              "employerId": {
+                "type": "string",
+                "analyzer": "lucene.keyword"
+              },
+              "employerName": [
+                {
+                  "type": "string",
+                  "analyzer": "lucene.standard"
+                },
+                {
+                  "type": "autocomplete",
+                  "tokenization": "edgeGram",
+                  "minGrams": 3,
+                  "maxGrams": 15
+                }
+              ]
+            }
+          }
+        }
+      },
+      "accountInfo": {
+        "type": "document",
+        "fields": {
+          "accountStatus": {
+            "type": "token"
+          },
+          "totalBalance": {
+            "type": "number"
+          },
+          "akaun1Balance": {
+            "type": "number"
+          },
+          "akaun2Balance": {
+            "type": "number"
+          },
+          "lastUpdated": {
+            "type": "date"
+          }
+        }
+      },
+      "contributionStats": {
+        "type": "document",
+        "fields": {
+          "totalMonths": {
+            "type": "number"
+          },
+          "consecutiveMonths": {
+            "type": "number"
+          },
+          "lastDate": {
+            "type": "date"
+          },
+          "avgMonthly": {
+            "type": "number"
+          },
+          "totalLifetime": {
+            "type": "number"
+          },
+          "hasGaps": {
+            "type": "boolean"
+          }
+        }
+      },
+      "complianceFlags": {
+        "type": "document",
+        "fields": {
+          "riskScore": {
+            "type": "token"
+          },
+          "hasIrregularities": {
+            "type": "boolean"
+          },
+          "hasMissingContributions": {
+            "type": "boolean"
+          },
+          "hasWageDiscrepancies": {
+            "type": "boolean"
+          },
+          "hasActiveComplaints": {
+            "type": "boolean"
+          }
+        }
+      },
+      "eligibilityFlags": {
+        "type": "document",
+        "fields": {
+          "housingWithdrawal": {
+            "type": "boolean"
+          },
+          "educationWithdrawal": {
+            "type": "boolean"
+          },
+          "medicalWithdrawal": {
+            "type": "boolean"
+          },
+          "retirementAge": {
+            "type": "boolean"
+          }
+        }
+      },
+      "metadata": {
+        "type": "document",
+        "fields": {
+          "updatedAt": {
+            "type": "date"
+          },
+          "createdAt": {
+            "type": "date"
+          }
+        }
+      },
+      "_id": {
+        "type": "objectId"
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "employers_vector_index",
+  "type": "vectorSearch",
+  "fields": [
+    {
+      "type": "vector",
+      "path": "semanticEmbedding",
+      "numDimensions": 512,
+      "similarity": "cosine"
+    }
+  ]
+}

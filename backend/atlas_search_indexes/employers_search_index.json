@@ -1,0 +1,152 @@
+{
+  "name": "employers_search_index",
+  "mappings": {
+    "dynamic": false,
+    "fields": {
+      "employerId": {
+        "type": "string",
+        "analyzer": "lucene.keyword"
+      },
+      "employerCode": {
+        "type": "string",
+        "analyzer": "lucene.keyword"
+      },
+      "companyProfile": {
+        "type": "document",
+        "fields": {
+          "companyName": [
+            {
+              "type": "string",
+              "analyzer": "lucene.standard"
+            },
+            {
+              "type": "autocomplete",
+              "tokenization": "edgeGram",
+              "minGrams": 3,
+              "maxGrams": 15
+            }
+          ],
+          "registrationNumber": {
+            "type": "string",
+            "analyzer": "lucene.keyword"
+          },
+          "industryClassification": {
+            "type": "document",
+            "fields": {
+              "sector": {
+                "type": "token"
+              },
+              "msicCode": {
+                "type": "string",
+                "analyzer": "lucene.keyword"
+              },
+              "msicDescription": {
+                "type": "string",
+                "analyzer": "lucene.standard"
+              }
+            }
+          },
+          "companySize": {
+            "type": "token"
+          },
+          "numberOfEmployees": {
+            "type": "number"
+          },
+          "businessAddress": {
+            "type": "document",
+            "fields": {
+              "state": {
+                "type": "token"
+              },
+              "city": {
+                "type": "token"
+              }
+            }
+          }
+        }
+      },
+      "accountStatus": {
+        "type": "document",
+        "fields": {
+          "status": {
+            "type": "token"
+          },
+          "accountType": {
+            "type": "token"
+          },
+          "registrationDate": {
+            "type": "date"
+          },
+          "lastActiveDate": {
+            "type": "date"
+          }
+        }
+      },
+      "memberSummary": {
+        "type": "document",
+        "fields": {
+          "totalMembers": {
+            "type": "number"
+          },
+          "activeMembers": {
+            "type": "number"
+          }
+        }
+      },
+      "productTags": {
+        "type": "token"
+      },
+      "complianceStatus": {
+        "type": "document",
+        "fields": {
+          "riskRating": {
+            "type": "token"
+          },
+          "hasArrears": {
+            "type": "boolean"
+          },
+          "hasLegalCases": {
+            "type": "boolean"
+          },
+          "arrearsAmount": {
+            "type": "number"
+          },
+          "auditResult": {
+            "type": "token"
+          }
+        }
+      },
+      "contributionStats": {
+        "type": "document",
+        "fields": {
+          "totalLifetime": {
+            "type": "number"
+          },
+          "avgMonthly": {
+            "type": "number"
+          },
+          "onTimeRate": {
+            "type": "number"
+          },
+          "trend": {
+            "type": "token"
+          }
+        }
+      },
+      "metadata": {
+        "type": "document",
+        "fields": {
+          "updatedAt": {
+            "type": "date"
+          },
+          "createdAt": {
+            "type": "date"
+          }
+        }
+      },
+      "_id": {
+        "type": "objectId"
+      }
+    }
+  }
+}
